@@ -1,3 +1,4 @@
+# Download and install font: https://github.com/ryanoasis/nerd-fonts/releases/download/v3.4.0/IosevkaTerm.zip
 font-family = "IosevkaTerm Nerd Font Mono"
 macos-option-as-alt = left
 shell-integration-features = ssh-terminfo,ssh-env
