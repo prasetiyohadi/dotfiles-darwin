@@ -6,7 +6,7 @@ install_packages() {
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
   # Terminal tools
-  packages="atuin bat difftastic direnv eza gh gum jq knqyf263/pet/pet nap pass pass-git-helper pass-otp rsync starship stow tmux tmuxp yq zoxide"
+  packages="atuin bat difftastic direnv eza gh gum jq knqyf263/pet/pet nap pass pass-git-helper pass-otp rsync starship stow tmux tmuxp wget yq zoxide"
 
   # LazyVim dependencies
   packages="$packages neovim git lazygit tree-sitter-cli gcc curl fzf ripgrep fd"
