@@ -6,28 +6,28 @@ Dotfiles specific for Darwin/MacOS system
 
 1. Clone the repository
 
-  ```bash
-  git clone --depth=1 https://github.com/prasetiyohadi/dotfiles-darwin.git
-  ```
+    ```bash
+    git clone --depth=1 https://github.com/prasetiyohadi/dotfiles-darwin.git
+    ```
 
 1. Install the packages
 
-  ```bash
-  bash install.sh
-  ```
+    ```bash
+    bash install.sh
+    ```
 
 1. Configure secrets
 
-  ```bash
-  cp env.sample .envrc
-  nvim .envrc
-  ```
+    ```bash
+    cp env.sample .envrc
+    nvim .envrc
+    ```
 
 1. Sync the configuration files
 
-  ```bash
-  bash sync.sh
-  ```
+    ```bash
+    bash sync.sh
+    ```
 
 ## Additional Tools and Frameworks
 
