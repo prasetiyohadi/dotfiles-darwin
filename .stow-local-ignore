@@ -1,6 +1,5 @@
 .*.tpl
 .env.*
-.envrc
 .git
 .gitignore
 env.*
