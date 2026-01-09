@@ -23,7 +23,7 @@ Dotfiles specific for Darwin/MacOS system
     nvim .envrc
     ```
 
-1. Sync the configuration files
+1. Sync the configuration files, uncomment backup for Atuin config file if necessary
 
     ```bash
     bash sync.sh
