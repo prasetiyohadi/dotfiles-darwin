@@ -7,7 +7,7 @@ mkdir -p ~/.config/{atuin,ghostty,mise,pet}
 
 # Generate config file from template
 envsubst <.config/pet/config.toml.tpl >.config/pet/config.toml
-envsubst <.gitconfig.tpl >.gitconfig
+envsubst '$GIT_EMAIL,$GIT_NAME' <.gitconfig.tpl >.gitconfig
 
 chmod og-rwx .config/pet/config.toml
 
