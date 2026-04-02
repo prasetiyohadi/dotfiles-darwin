@@ -59,6 +59,7 @@ These are the tools and frameworks that I use for my daily tasks:
 - [LazyVim](https://www.lazyvim.org/installation)
 - [WireGuard](https://www.wireguard.com/install/)
 - [Tunnelblick](https://tunnelblick.net/downloads.html)
+- [Obsidian](https://obsidian.md/)
 
 ## Packages
 

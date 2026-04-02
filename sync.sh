@@ -2,21 +2,21 @@
 set -euo pipefail
 
 # Prepare config directories
-echo '### Preparing config directories...' | gum format
+echo '## Preparing config directories...' | gum format
 mkdir -p ~/.{config,nap,ssh}
 mkdir -p ~/.config/{atuin,ghostty,mise,pet}
 
 # Generate config files from template
-echo '### Generating config files from template...' | gum format
+echo '## Generating config files from template...' | gum format
 envsubst <.config/pet/config.toml.tpl >.config/pet/config.toml
 envsubst '$GIT_EMAIL,$GIT_NAME' <.gitconfig.tpl >.gitconfig
 
 # Secure config files containing secrets
-echo '### Securing config files containing secrets...' | gum format
+echo '## Securing config files containing secrets...' | gum format
 chmod og-rwx .config/pet/config.toml
 
 # Create backup for existing config files
-echo '### Creating backup for the existing config files...' | gum format
+echo '## Creating backup for the existing config files...' | gum format
 CURRENT_DATE=$(date +%Y%m%d-%H%M%S)
 # mv -v ~/.config/atuin/config.toml{,".bak-$CURRENT_DATE"} # atuin auto-generated its config upon install so we need to backup it first, uncomment this line on initial sync
 # mv -v ~/.config/mise/config.toml{,".bak-$CURRENT_DATE"}
@@ -30,7 +30,14 @@ CURRENT_DATE=$(date +%Y%m%d-%H%M%S)
 # mv -v ~/.zshrc{,".bak-$CURRENT_DATE"}
 
 # Create symlinks for the config files
-echo '### Creating symlinks for the config files...' | gum format
+echo '## Creating symlinks for the config files...' | gum format
 stow .
 
-echo '### TODO: Execute `source ~/.zshrc`' | gum format
+# Special case for Nushell config files in MacOS
+NU_DIR="/Users/$USER/Library/Application Support/nushell"
+mkdir -p "$NU_DIR"
+ln -sf ~/.config/nushell/config.nu "$NU_DIR/config.nu"
+ln -sf ~/.config/nushell/env.nu "$NU_DIR/env.nu"
+echo '### ✓ Nushell configs linked' | gum format
+
+echo '## TODO: Execute `source ~/.zshrc`' | gum format

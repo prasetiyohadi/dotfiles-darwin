@@ -12,6 +12,14 @@ fi
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="/opt/homebrew/bin:$PATH"
 export PATH="/opt/homebrew/sbin:$PATH"
+export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
+
+# Added by Antigravity
+export PATH="$HOME/.antigravity/antigravity/bin:$PATH"
+if command -v wt >/dev/null 2>&1; then eval "$(command wt config shell init zsh)"; fi
+
+# opencode
+export PATH="$HOME/.opencode/bin:$PATH"
 
 # Completions
 eval "$(atuin init zsh)"
@@ -51,6 +59,7 @@ alias krun='kubectl run'
 alias kubi='kubie'
 alias kx='kubectx'
 alias napl='nap $(nap list | gum filter)'
+alias nu='nu'
 # alias pbcopy='xsel --clipboard --input'
 # alias pbpaste='xsel --clipboard --output'
 PROXY_SRC=
@@ -58,7 +67,7 @@ NO_PROXY_SRC='"localhost,127.0.0.1"'
 alias proxy_up='export ftp_proxy=$PROXY_SRC http_proxy=$PROXY_SRC https_proxy=$PROXY_SRC no_proxy=$NO_PROXY_SRC'
 alias proxy_down='unset ftp_proxy http_proxy https_proxy no_proxy'
 alias sp='steampipe'
-alias tv='tidy-viewer'
+# alias tv='tidy-viewer' # conflicts with television
 alias vi='nvim'
 alias vim='nvim'
 alias zj='zellij'
@@ -91,7 +100,18 @@ if [[ ! "$(echo $OSTYPE | tr -d '[:digit:][:punct:]')" == "darwin" ]]; then
 fi
 
 # Homebrew
-FPATH=$(brew --prefix)/share/zsh/site-functions:$FPATH
+if type brew &>/dev/null; then
+    FPATH=$(brew --prefix)/share/zsh-completions:$(brew --prefix)/share/zsh/site-functions:$FPATH
+
+    autoload -Uz compinit
+    compinit
+fi
+
+# Kiro
+if [ $(command -v kiro) ]; then
+    [[ "$TERM_PROGRAM" == "kiro" ]] && . "$(kiro --locate-shell-integration-path zsh)"
+fi
+
 
 # Minio client
 if [ $(command -v mc) ]; then
@@ -316,15 +336,10 @@ function git_current_branch() {
   echo ${ref#refs/heads/}
 }
 
+# Name: gitignore_gen
+# Description: generate .gitignore file from Toptal gitignore templates
+# Usage example: gitignore_gen node
+function gitignore_gen() { curl -sLw "\n" https://www.toptal.com/developers/gitignore/api/$@ ;}
+
 ### End custom functions ###
 # zprof # end profiling
-
-# Load a few important annexes, without Turbo
-# (this is currently required for annexes)
-zinit light-mode for \
-    zdharma-continuum/zinit-annex-as-monitor \
-    zdharma-continuum/zinit-annex-bin-gem-node \
-    zdharma-continuum/zinit-annex-patch-dl \
-    zdharma-continuum/zinit-annex-rust
-
-### End of Zinit's installer chunk
